@@ -1,6 +1,6 @@
 from django.db import models
 
-class Organisation(models.Model):
+class organisation(models.Model):
     id_organisation = models.CharField(max_length=200, verbose_name=u"ID организации")
     organisation_name = models.CharField(max_length=200, verbose_name="Имя организации")
     organisation_okved = models.CharField(max_length=8, verbose_name="Вид деятельности", blank=True)
@@ -19,7 +19,7 @@ class Organisation(models.Model):
         ordering = ['-id_organisation', '-organisation_okved', '-organisation_category', 
         '-organisation_description', '-organisation_principal', '-organisation_link', '-organisation_sanctions']
 
-class Product(models.Model):
+class product(models.Model):
     id_product = models.CharField(max_length=200, verbose_name=u"ID продукта")
     product_name = models.CharField(max_length=200, verbose_name="Название продукта")
     product_tags = models.CharField(max_length=8, verbose_name="Тэг", blank=True)
