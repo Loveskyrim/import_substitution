@@ -119,4 +119,41 @@ GitHub.sublime-settings
 .vscode/settings.json
 
 
+ 
+
+VulnerabilityProject.git/config
+VulnerabilityProject.git/description
+VulnerabilityProject.git/HEAD
+VulnerabilityProject.git/packed-refs
+VulnerabilityProject.git/hooks/applypatch-msg.sample
+VulnerabilityProject.git/hooks/commit-msg.sample
+VulnerabilityProject.git/hooks/fsmonitor-watchman.sample
+VulnerabilityProject.git/hooks/post-update.sample
+VulnerabilityProject.git/hooks/pre-applypatch.sample
+VulnerabilityProject.git/hooks/pre-commit.sample
+VulnerabilityProject.git/hooks/pre-merge-commit.sample
+VulnerabilityProject.git/hooks/pre-push.sample
+VulnerabilityProject.git/hooks/pre-rebase.sample
+VulnerabilityProject.git/hooks/pre-receive.sample
+VulnerabilityProject.git/hooks/prepare-commit-msg.sample
+VulnerabilityProject.git/hooks/update.sample
+VulnerabilityProject.git/info/exclude
+VulnerabilityProject.git/objects/pack/pack-62232305aced8d6b323a2879775b4fc3d37c2458.idx
+VulnerabilityProject.git/objects/pack/pack-62232305aced8d6b323a2879775b4fc3d37c2458.pack
+
+Rat20/Rat20/settings.py
+Rat20/base/*
+Rat20/Rat20/settings_server.py
+Rat20/testDevel/*
+Rat20/vulnerability_db/exploitdbWorkDirectory/exploit-database
+Rat20/Media/Reports/*
+Rat20/static
+
+# Rat20/authorization/migrations/*
+# Rat20/bulletins/migrations/*
+# Rat20/mainPage/migrations/*
+# Rat20/projects/migrations/*
+# Rat20/reports/migrations/
+# Rat20/vulnerability_db/migrations/*
+
 /.project
