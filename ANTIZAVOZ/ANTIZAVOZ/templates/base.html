@@ -1,0 +1,218 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<style>
+#toTop {
+    width:100px;
+    border:1px solid #ccc;
+    background:#f7f7f7;
+    text-align:center;
+    padding:5px;
+    position:fixed;
+    bottom:10px; /* отступ кнопки от нижнего края страницы*/
+    left:10px;
+    cursor:pointer;
+    display:none;
+    color:#333;
+    font-family:verdana;
+    font-size:11px;
+    z-index: 999999;
+}
+
+</style>
+<head>
+    <meta charset="utf-8">
+
+    <!-- Блок, где дается название страницы, которое будет отображаться во вкладке браузера -->
+    <title>{% block title %}Default title{% endblock title %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- Bootstrap table CSS-->
+<!--    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">-->
+
+    <!-- Bootstrap DATA-table CSS-->
+<!--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">-->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+
+<!--    FixedHeader css-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"> -->
+
+</head>
+
+<div id="toTop" > ^ Наверх </div>
+
+<body class="bg-light">
+    <header>
+        <!-- Общая для всего проекта шапка с ссылками "на главную, обновления бд, поддержка" -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+            <li class="container">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav">
+                    <a class="navbar-brand mb-0 h1 nav-link" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                      title="Vulnerability Scanner"><img class="logo" src="/static/img/favicon.jpg" style="max-height:40px;"></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Блог">Проекты<span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'organisations' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Просмотр и добавление организаций">Компании
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="Просмотр и добавление продукции">Продукция
+                        </a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link" id='UpdateProgressTitleNav' href="{% url 'updatedb' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'updatedb' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Страница для обновления баз данных">
+                            <div id='ProgressBarNav' class="progress" style="height: 25px; width: 150px; visibility: hidden;">
+                                <div id='ScanningProgressBarNav' class="progress-bar" role="progressbar"
+                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: {{ loading_percent }}%">
+                                    {{ loading_percent }}%
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <span id='UpdateProgressTitleNav' style="padding: 8px" class="navbar-text" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text" style="padding: 8px" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Страница для обновления баз данных">
+                            <div id='ProgressBarNav' class="progress" style="height: 25px; width: 150px; visibility: hidden;">
+                                <div id='ScanningProgressBarNav' class="progress-bar" role="progressbar"
+                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                     style="width: {{ loading_percent }}%">
+                                    {{ loading_percent }}%
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+                <div class="col text-right">
+                    <span class="p-2 navbar-text ">Добро пожаловать, {{user.username}}!</span>
+                    <a class="btn  btn-outline-info text-info" href="{% url 'logout' %}">Выйти</a>
+                </div>
+                {% else %}
+                <a class="navbar-brand mb-0 h1 nav-link" href="{% url 'login' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                      title="Vulnerability Scanner"><img class="logo" src="/static/img/logo.png" style="max-height:30px;"></a>
+                <div class="col text-right">
+                    <a class="btn  btn-primary" href="{% url 'register' %}">Зарегистрироваться</a>
+                    <a class="btn  btn-info" href="{% url 'login' %}">Войти</a>
+                </div>
+                {% endif %}
+            </li>
+        </nav>
+    </header>
+
+    <!-- {% if messages %}
+<div>
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" color="red" {% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %} -->
+
+    <!-- Блок, индивидуального контента для каждой страницы -->
+    {% block main %}Main Block{% endblock main %}
+
+    <!-- Общий для всего проекта нижний блок -->
+    <footer class="py-4 text-muted">
+        <div class="container">
+
+            <p>Сканер уязвимостей по открытым базам данных уязвимостей &copy;</p>
+            <p>Почта для поддержки: <a href="mailto:vulscan@astralinux.ru">vulscan@astralinux.ru</a></p>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+
+<!--    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.js"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+    <script src="{% static 'notiflix-aio.js' %}"></script>
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css"> -->
+
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+<!--    FixedHeader js-->
+    <script src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
+
+    <script>
+        var stage = '{{ stage }}'
+        var stat = '{{ status }}'
+        var last_update = '{{ last_update }}'
+        var loading_percent = '{{ loading_percent }}'
+
+        Notiflix.Notify.Init({
+            //position:"right-bottom",
+            distance: "3%",
+            //backOverlay:true,
+            //closeButton:true,
+        });
+        {% if messages %}
+        {% for message in messages %}
+        console.log("{{message.tags}}");
+        console.log("{{message.level}}");
+        console.log("{{message}}");
+        if ("{{message.tags}}" == 'info') {
+            Notiflix.Notify.Info("{{message}}");
+        }
+        if ("{{message.tags}}" == 'success') {
+            Notiflix.Notify.Success("{{message}}");
+        }
+        if ("{{message.tags}}" == 'warning') {
+            Notiflix.Notify.Warning("{{message}}");
+        }
+        if ("{{message.tags}}" == 'error') {
+            Notiflix.Notify.Failure("{{message}}");
+        }
+        {% endfor %}
+        {% endif %}
+
+    </script>
+    <script src="{% static 'Rat20/main.js' %}"></script>
+    {% block scripts %} {% endblock scripts %}
+</body>
+
+</html>

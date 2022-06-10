@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Сканер уязвимостей{% endblock title %}
+
+{% block main %}
+<!-- Шапка главной страницы, где размещены кнопки создания проекта-->
+<section class="jumbotron text-center bg-white">
+    <div class="container">
+        <h1>Сканер уязвимостей</h1>
+        <p class="lead text-muted">Инструмент сканирования пакетов или программ по открытым источникам баз данных
+            уязвимостей</p>
+        <button type="button" id="myInput" class="btn btn-primary btn-lg " data-toggle="modal"
+                data-target="#exampleModal">
+            Создать проект
+        </button>
+    </div>
+</section>
+
+
+<div class="album py-2 bg-light">
+    <div class="container">
+    {% for product in products %}
+        <h2>
+            <a href="{{ product.get_absolute_url }}">{{ product.product_name }}</a>
+        </h2>
+        <p class="date">
+            Published {{ product.publish }} by {{ product.author }}
+        </p>
+        {{ product.product_info|truncatewords:30|linebreaks }}
+    {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock main %}
+
+{% block scripts %}
+
+<script src="{% static 'mainPage/main.js' %}"></script>
+{% endblock scripts %}

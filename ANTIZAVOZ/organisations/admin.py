@@ -4,12 +4,18 @@ from .models import organisation, product
 
 class OrganisationAdmin(admin.ModelAdmin):
     "Админка организации"""
-    fields = ('OS_name', 'id_bulletin', 'url_bulletin')
+    list_display = ('id_organisation', 'organisation_name', 'organisation_okved', 'organisation_category', 'organisation_sanctions')
+    list_filter = ('organisation_name', 'organisation_okved', 'organisation_category', 'organisation_sanctions')
+    search_fields = ('organisation_name', 'organisation_okved', 'organisation_category')
+    ordering = ['organisation_name', 'organisation_category']
 
 
 class ProductAdmin(admin.ModelAdmin):
     "Админка продукта"""
-    fields = ('OS_name', 'id_bulletin', 'url_bulletin', 'bulletin_author', 'status')
+    list_display = ('product_name', 'product_tags', 'product_info', 'product_sanctions_import', 'product_sanctions_export')
+    list_filter = ('product_name', 'product_tags', 'product_sanctions_import', 'product_sanctions_export')
+    search_fields = ('product_name', 'product_tags')
+    ordering = ['product_name']
 
 
 admin.site.register(organisation, OrganisationAdmin)

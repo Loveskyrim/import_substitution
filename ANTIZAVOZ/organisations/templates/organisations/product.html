@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ product_item.product_name }}{% endblock %}
+{% block content %}
+    <h1>{{ product_item.product_name }}</h1>
+    <p class="date">
+        Зарегистрировано в системе: {{ product_item.publish }}, автор: {{ product_item.author }}
+    </p>
+    <p class="product_info">
+        Инфо: {{ product_item.product_info|linebreaks }}
+    </p>
+    <p class="product_sanctions_import">
+        Санкции на импорт: {{ product_item.product_sanctions_import }}
+    </p>
+    <p class="product_sanctions_import">
+        Санкции на экспорт: {{ product_item.product_sanctions_import }}
+    </p>
+
+{% endblock %}
