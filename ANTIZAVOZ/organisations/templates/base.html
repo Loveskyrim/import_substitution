@@ -112,14 +112,14 @@
 
                 <div class="col text-right">
                     <span class="p-2 navbar-text ">Добро пожаловать, {{user.username}}!</span>
-                    <a class="btn  btn-outline-info text-info" href="#">Выйти</a>
+                    <a class="btn  btn-outline-info text-info" href="{% url 'logout' %}">Выйти</a>
                 </div>
                 {% else %}
                 <a class="navbar-brand mb-0 h1 nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                       title="Vulnerability Scanner"><img class="logo" src="static/img/favicon.jpg" style="max-height:30px;"></a>
                 <div class="col text-right">
-                    <a class="btn  btn-primary" href="#">Зарегистрироваться</a>
-                    <a class="btn  btn-info" href="#">Войти</a>
+                    <a class="btn  btn-primary" href="{% url 'register' %}">Зарегистрироваться</a>
+                    <a class="btn  btn-info" href="{% url 'login' %}">Войти</a>
                 </div>
                 {% endif %}
             </li>
