@@ -25,5 +25,5 @@ urlpatterns = [
     path('', include('mainPage.urls')),
     # path(r'^organisation/', include('organisations.urls')),
     # path('', include('organisations.urls')),
-    # path('favicon.ico', RedirectView.as_view(url='/static/img/favicon.jpg'), name='favicon'),
+    path('favicon.ico', RedirectView.as_view(url='static/img/favicon.jpg'), name='favicon'),
 ]

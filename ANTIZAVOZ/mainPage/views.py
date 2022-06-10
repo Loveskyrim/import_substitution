@@ -4,7 +4,7 @@ from organisations.models import *
 
 def product_list(request):
     products = product.objects.filter(status__in=('registered', 'Registered'))
-    return render(request, 'mainPage/mainPage.html', {'products': products})
+    return render(request, 'mainPage/mainPage.html', context={'products': products})
 
 
 def product_detail(request, year, month, day, prod):
@@ -13,4 +13,4 @@ def product_detail(request, year, month, day, prod):
                                      publish__year=year,
                                      publish__month=month,
                                      publish__day=day)
-    return render(request, 'organisations/product.html', {'product_item': product_item})
+    return render(request, 'organisations/product.html', context={'product_item': product_item})

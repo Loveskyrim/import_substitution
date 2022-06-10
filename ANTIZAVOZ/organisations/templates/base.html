@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -56,29 +56,29 @@
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav">
                     <a class="navbar-brand mb-0 h1 nav-link" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                      title="Vulnerability Scanner"><img class="logo" src="/static/img/favicon.jpg" style="max-height:40px;"></a>
+                      title="Vulnerability Scanner"><img class="logo" src="static/img/favicon.jpg" style="max-height:40px;"></a>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Блог">Проекты<span class="sr-only">(current)</span>
+                                        title="Блог">Блог<span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'organisations' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                         title="Просмотр и добавление организаций">Компании
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'products' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                         title="Просмотр и добавление продукции">Продукция
                         </a>
                     </li>
                     {% if user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link" id='UpdateProgressTitleNav' href="{% url 'updatedb' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a class="nav-link" id='UpdateProgressTitleNav' href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                            title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'updatedb' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        <a class="nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                            title="Страница для обновления баз данных">
                             <div id='ProgressBarNav' class="progress" style="height: 25px; width: 150px; visibility: hidden;">
                                 <div id='ScanningProgressBarNav' class="progress-bar" role="progressbar"
@@ -112,14 +112,14 @@
 
                 <div class="col text-right">
                     <span class="p-2 navbar-text ">Добро пожаловать, {{user.username}}!</span>
-                    <a class="btn  btn-outline-info text-info" href="{% url 'logout' %}">Выйти</a>
+                    <a class="btn  btn-outline-info text-info" href="#">Выйти</a>
                 </div>
                 {% else %}
-                <a class="navbar-brand mb-0 h1 nav-link" href="{% url 'login' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                      title="Vulnerability Scanner"><img class="logo" src="/static/img/logo.png" style="max-height:30px;"></a>
+                <a class="navbar-brand mb-0 h1 nav-link" href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                      title="Vulnerability Scanner"><img class="logo" src="static/img/favicon.jpg" style="max-height:30px;"></a>
                 <div class="col text-right">
-                    <a class="btn  btn-primary" href="{% url 'register' %}">Зарегистрироваться</a>
-                    <a class="btn  btn-info" href="{% url 'login' %}">Войти</a>
+                    <a class="btn  btn-primary" href="#">Зарегистрироваться</a>
+                    <a class="btn  btn-info" href="#">Войти</a>
                 </div>
                 {% endif %}
             </li>
@@ -146,8 +146,8 @@
     <footer class="py-4 text-muted">
         <div class="container">
 
-            <p>Сканер уязвимостей по открытым базам данных уязвимостей &copy;</p>
-            <p>Почта для поддержки: <a href="mailto:vulscan@astralinux.ru">vulscan@astralinux.ru</a></p>
+            <p>Портал импортозамещения &copy;</p>
+            <p>Почта для поддержки: <a href="mailto:import@substitution.ru">import@substitution.ru</a></p>
         </div>
     </footer>
 
