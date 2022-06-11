@@ -113,23 +113,28 @@ body {
                             </div>
                         </a>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <span id='UpdateProgressTitleNav' style="padding: 8px" class="navbar-text" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                           title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</span>
-                    </li>
-                    <li class="nav-item">
-                        <span class="navbar-text" style="padding: 8px" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                           title="Страница для обновления баз данных">
-                            <div id='ProgressBarNav' class="progress" style="height: 25px; width: 150px; visibility: hidden;">
-                                <div id='ScanningProgressBarNav' class="progress-bar" role="progressbar"
-                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: {{ loading_percent }}%">
-                                    {{ loading_percent }}%
+                    {% else %} 
+                        <li class="nav-item">
+                            <a class="nav-link" id='UpdateProgressTitleNav' href="{% url 'profile' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Профиль">Профиль</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <span id='UpdateProgressTitleNav' style="padding: 8px" class="navbar-text" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="navbar-text" style="padding: 8px" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Страница для обновления баз данных">
+                                <div id='ProgressBarNav' class="progress" style="height: 25px; width: 150px; visibility: hidden;">
+                                    <div id='ScanningProgressBarNav' class="progress-bar" role="progressbar"
+                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: {{ loading_percent }}%">
+                                        {{ loading_percent }}%
+                                    </div>
                                 </div>
-                            </div>
-                        </span>
-                    </li>
+                            </span>
+                        </li>
                     {% endif %}
 
                 </ul>

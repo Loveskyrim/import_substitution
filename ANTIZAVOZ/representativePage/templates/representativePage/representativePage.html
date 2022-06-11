@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Профиль пользователя{% endblock title %}
+
+{% block main %}
+<section class="jumbotron text-center bg-white">
+    <div class="container">
+        <p class="lead text-muted">Профиль пользователя</p>
+
+        <button id="edit-profile" type="button" class="btn btn-outline-primary">Редактировать данные</button>
+        <button id="add-company" type="button" class="btn btn-outline-primary">Добавить компанию</button>
+    </div>
+</section>
+
+
+<!-- Модальные окна редактирования информации -->
+<div>
+    {% include "./addCompanyModal.html" %}
+</div>
+
+<div>
+    {% include "./editCompanyModal.html" %}
+</div>
+
+<div>
+    {% include "./editProfileModal.html" %}
+</div>
+
+{% endblock main %}
+
+{% block scripts %}
+
+<script src="{% static 'representativePage/representativePage.js' %}"></script>
+{% endblock scripts %}
