@@ -1,0 +1,46 @@
+<div class="modal fade" id="editProjectInfoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Добавление компании</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-group my-2">
+                        <label  for="companyName">Компания, которую вы представляете</label>
+                        <textarea id="companyNameText" type="text"  class="form-control"
+                                  rows="10"></textarea>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="companyAddress">ИНН</label>
+                        <textarea id="companyAddressText" type="text"  class="form-control"
+                                  rows="10"></textarea>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="companyInn">ИНН</label>
+                        <textarea id="companyInnText" type="text"  class="form-control"
+                                  rows="10"></textarea>
+                    </div>
+
+                    <div class="form-group my-2">
+                        <label for="companyOkved">Вид деятельности (ОКВЭД)</label>
+                        <textarea id="companyOkvedText" type="text"  class="form-control"
+                                  rows="10">TODO Выпадающий список</textarea>
+                    </div>
+ 
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" id="addCompanyData" class="btn btn-success" name="continue">Отправить на модерацию</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

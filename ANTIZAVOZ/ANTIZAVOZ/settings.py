@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'authorization',
     'mainPage',
     'moderatorPage',
+    'representativePage',
     'organisations',
 
 ]

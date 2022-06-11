@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('authorization.urls')),
     path('', include('mainPage.urls')),
     path('', include('moderatorPage.urls')),
+    path('', include('representativePage.urls')),
     path('', include('organisations.urls')),
     path('favicon.ico', RedirectView.as_view(url='static/img/favicon.jpg'), name='favicon'),
 ]
