@@ -34,6 +34,12 @@
 {
     margin-top: 15px !important;
 }
+
+li
+{
+	list-style: none;
+
+}
 </style>
 <link rel="stylesheet" href="{% static 'organisations/css/main_table.css'%}">
 		<!--Таблица организаций-->
@@ -53,7 +59,7 @@
 				<!--data from db-->
 				{% for employee in employees %}
 				<tr>
-					<td>{{employee.organisation_name}}</td>
+					<td><li><a style="color: #111;" href=" ">{{employee.organisation_name}}</a></li></td>
 					<td>{{employee.organisation_okved}}</td>
 					<td>{{employee.organisation_category}}</td>
 					<td>{{employee.organisation_sanctions}}</td>
@@ -95,7 +101,7 @@
 				"next": "Следующая",
 				"last": "Последняя"},},
 			paging: true,
-			pageLength: 1,
+			pageLength: 15,
 			lengthChange: false,
 			autoWidth: true,
 			searching: true,
