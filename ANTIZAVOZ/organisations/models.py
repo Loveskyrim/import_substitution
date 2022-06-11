@@ -9,7 +9,7 @@ class organisation(models.Model):
         ('draft', 'Draft'),
         ('registered', 'Registered'),
     )
-    id_organisation = models.CharField(max_length=200, verbose_name=u"ID организации")
+    id_organisation = models.CharField(max_length=200, verbose_name=u"ID организации", blank=True)
     organisation_name = models.CharField(max_length=200, verbose_name=u"Имя организации")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=u'Пользователь регистратор', default=1)
     slug = models.SlugField(max_length=250, unique_for_date='publish', blank=True)
@@ -17,10 +17,12 @@ class organisation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     organisation_okved = models.CharField(max_length=8, verbose_name=u"Вид деятельности", blank=True)
-    organisation_category = models.CharField(max_length=8, verbose_name=u"Категория", blank=True)
-    organisation_description = models.TextField(verbose_name=u"Описание", blank=True)
-    organisation_principal = models.CharField(max_length=8, verbose_name=u"Директор", blank=True)
-    organisation_link = models.CharField(max_length=8, verbose_name=u"Ссылка", blank=True)
+    organisation_category = models.CharField(max_length=200, verbose_name=u"Категория", blank=True)
+    organisation_description = models.CharField(max_length=200, verbose_name=u"Описание", blank=True)
+    organisation_principal = models.CharField(max_length=200, verbose_name=u"Директор", blank=True)
+    organisation_inn = models.CharField(max_length=200, verbose_name=u"ИНН", blank=True)
+    organisation_adress = models.CharField(max_length=250, verbose_name=u"Адрес", blank=True)
+    organisation_link = models.CharField(max_length=250, verbose_name=u"Ссылка", blank=True)
     organisation_sanctions = models.CharField(max_length=8, verbose_name=u"Под санкциями", blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
