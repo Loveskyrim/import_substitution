@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Портал импортозамещения{% endblock title %}
+
+{% block main %}
+<!-- Шапка главной страницы, где размещены кнопки создания проекта-->
+<section class="jumbotron text-center bg-white">
+    <div class="container">
+        <p class="lead text-muted">Редактирование данных</p>
+
+        <button id="update-db" type="button" class="btn btn-outline-primary">Обновление базы</button>
+    </div>
+</section>
+
+{% endblock main %}
+
+{% block scripts %}
+
+<script src="{% static 'moderatorPage/moderatorPage.js' %}"></script>
+{% endblock scripts %}
