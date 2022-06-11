@@ -91,11 +91,11 @@ print(os.environ["DATABASE_USER"],)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["DATABASE_NAME"],
-        'USER': os.environ["DATABASE_USER"],
-        'PASSWORD': os.environ["DATABASE_PASSWORD"],
-        'HOST': os.environ["DATABASE_HOST"],
-        'PORT': os.environ["DATABASE_PORT"]
+        'NAME': 'django_db',
+        'USER' : 'dima',
+        'PASSWORD' : 'user1234',
+        'HOST' : '127.0.0.1',
+        'PORT' : '5432'
     }
 }
 

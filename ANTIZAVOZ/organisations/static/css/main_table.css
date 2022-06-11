@@ -1,5 +1,3 @@
-
-
 /* button next, prev*/
 .page-item.active .page-link
 {
@@ -30,8 +28,4 @@
 .dataTables_paginate
 {
     margin-top: 15px !important;
-
-
 }
-
-/* NAME*/
