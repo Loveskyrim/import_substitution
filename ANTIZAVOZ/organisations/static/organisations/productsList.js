@@ -20,7 +20,7 @@ $(document).ready(function () {
     ]
 
 
-    var table = $('#table_products').DataTable({
+    var table = $('#productsTable').DataTable({
         "language": {
             "sProcessing": "Подождите...",
             "sLengthMenu": "Показать _MENU_ продуктов",

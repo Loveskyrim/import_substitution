@@ -75,6 +75,10 @@
                     </li>
                     {% if user.is_superuser %}
                     <li class="nav-item">
+                        <a class="nav-link" id='UpdateProgressTitleNav' href="{% url 'moderate' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="Редактирование информации">Модерация</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id='UpdateProgressTitleNav' href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
                            title="Страница для обновления баз данных">Базы обновлены: {{ last_update }}</a>
                     </li>
@@ -117,7 +121,7 @@
                 </div>
                 {% else %}
                 <a class="navbar-brand mb-0 h1 nav-link" href="{% url 'index' %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                      title="ANTIZAVOS"><img class="logo" src="/static/img/icon.svg" style="max-height:30px;"></a>
+                      title="ANTIZAVOS"><img class="logo" src="/static/img/icon.svg" style="max-height:20px;"></a>
                 <div class="col text-right">
                     <a class="btn  btn-primary" href="{% url 'register' %}">Зарегистрироваться</a>
                     <a class="btn  btn-info" href="{% url 'login' %}">Войти</a>
