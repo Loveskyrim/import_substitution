@@ -11,14 +11,9 @@ $(document).ready(function () {
             },
             success: function (data) {
                 console.log(data)
-                alert(1)
-
-                // isScan = true;
-                // setTimeout(updateCardScanStatus, 500);
                 // Notiflix.Notify.Success('Обновление БД запущено!');
             },
             error: function (error) {
-                alert(0)
                 // Notiflix.Notify.Failure('ajax error');
             }
         });

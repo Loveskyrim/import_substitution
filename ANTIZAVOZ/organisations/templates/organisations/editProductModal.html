@@ -1,0 +1,32 @@
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Изменение информации о продукте</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-group my-2">
+                        <label  for="newProductName">Наименование продукта</label>
+                        <input type="text" class="form-control" id="newProductName" 
+                        maxlength="50" value="{{current_product.product_name}}">
+                    </div>
+ 
+                    <div class="form-group my-2">
+                        <label for="newProductDescription">Описание продукта</label>
+                        <textarea id="newProductDescription" type="text"  class="form-control"
+                                  rows="10">{{current_product.product_description}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="button" id="updateProjectData" class="btn btn-success" name="continue">Обновить данные</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
