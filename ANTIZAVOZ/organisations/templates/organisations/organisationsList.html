@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h4 class="mt-2">Организации</h4>
+			</div>
+			<div class="col-md-6">
+				<form id="filter-form">
+					<div class="d-flex bd-highlight justify-content-end">
+						<div class="p-2 bd-highlight">
+							<div class="form-group">
+							</div>
+						</div>
+						<div class="p-2 bd-highlight">
+							<input type="submit" name="submit" class="btn btn-primary d-inline"></div>
+						</div>
+
+
+					</form>
+				</div>
+				<hr>
+				<div class="table-responsive">
+					<table class="table table-bordered" id="example">
+						<thead>
+							<tr>
+								<th>Организация</th>
+								<th>Вид деятельности</th>
+								<th>Категория</th>
+								<th>Ссылка</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+	</div>
+
+{% endblock main %}
+
+{% block scripts %}
+
+			<script src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+			<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+			<script type="text/javascript">
+				var dataTable;
+				$(document).ready(function() {
+					dataTable = $('#example').DataTable( {
+						"ajax": {
+							data : {filter_data : function(){ return $('#filter-form').serialize();}
+						}
+						},
+						"columns" : [
+						{ data : "id"},
+						{ data : "category_name"},
+						{ data : "category_stock"},
+						{ data : "status"},
+						]
+					} );
+				} );
+
+				$('#filter-form').submit(function(e){
+					e.preventDefault();
+					dataTable.ajax.reload();
+				});
+			</script>
+{% endblock scripts %}

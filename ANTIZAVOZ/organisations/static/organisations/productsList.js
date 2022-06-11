@@ -20,14 +20,14 @@ $(document).ready(function () {
     ]
 
 
-    var table = $('#table_packet_id').DataTable({
+    var table = $('#table_products').DataTable({
         "language": {
             "sProcessing": "Подождите...",
-            "sLengthMenu": "Показать _MENU_ пакетов",
-            "sZeroRecords": "Пакеты отсутствуют.",
-            "sInfo": "Пакеты с _START_ до _END_ (всего _TOTAL_)",
+            "sLengthMenu": "Показать _MENU_ продуктов",
+            "sZeroRecords": "Продукция отсутствует.",
+            "sInfo": "Продукция с _START_ до _END_ (всего _TOTAL_)",
             "sInfoEmpty": "",
-            "sInfoFiltered": "(отфильтровано из _MAX_ пакетов)",
+            "sInfoFiltered": "(отфильтровано из _MAX_ продуктов)",
             "sInfoPostFix": "",
             "sSearch": "Поиск:",
             "sUrl": "",

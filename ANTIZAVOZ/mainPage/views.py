@@ -4,13 +4,12 @@ from organisations.models import *
 
 def product_list(request):
     products = product.objects.filter(status__in=('registered', 'Registered'))
+    # products = product.objects.all()
     return render(request, 'mainPage/mainPage.html', context={'products': products})
 
 
-def product_detail(request, year, month, day, prod):
+def product_detail(request, publish, prod):
     product_item = get_object_or_404(product, slug=prod,
-                                     status='published',
-                                     publish__year=year,
-                                     publish__month=month,
-                                     publish__day=day)
+                                     status='registered',
+                                     publish=publish)
     return render(request, 'organisations/product.html', context={'product_item': product_item})

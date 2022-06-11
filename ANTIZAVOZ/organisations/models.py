@@ -56,13 +56,6 @@ class product(models.Model):
     def __str__(self):
         return f"{self.pk} {self.product_name} {self.product_tags} {self.product_info} {self.product_sanctions_import} {self.product_sanctions_export}"
 
-    def get_absolute_url(self):
-        return reverse('organisation:product_detail',
-                       args=[self.publish.year,
-                             self.publish.strftime('%m'),
-                             self.publish.strftime('%d'),
-                             self.slug])
-
     class Meta:
         verbose_name = 'База данных продуктов'
         verbose_name_plural = 'Базы данных продуктов'
