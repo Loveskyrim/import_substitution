@@ -21,7 +21,7 @@
     <div class="container">
     {% for product in products %}
         <h2>
-            <a href="product.publish/prodict.slug">{{ product.product_name }}</a>
+            <a href="{{ product.publish }}/{{ product.slug }}">{{ product.product_name }}</a>
         </h2>
         <p class="date">
             Published {{ product.publish }} by {{ product.author }}
