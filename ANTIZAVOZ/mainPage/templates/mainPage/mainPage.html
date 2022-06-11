@@ -17,16 +17,37 @@
 </section>
 
 
-<div class="album py-2 bg-light">
+<div class="album py-2 bg-grey">
     <div class="container">
     {% for product in products %}
-        <h2>
-            <a href="{{ product.publish }}/{{ product.slug }}">{{ product.product_name }}</a>
-        </h2>
-        <p class="date">
-            Published {{ product.publish }} by {{ product.author }}
-        </p>
-        {{ product.product_info|truncatewords:30|linebreaks }}
+
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+<!--            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+
+            <div class="card-body">
+                <h2>
+                <a href="product/{{ product.publish|date:'SHORT_DATE_FORMAT' }}/{{ product.slug }}">{{ product.product_name }}</a>
+            </h2>
+                <h6 class="card-subtitle mb-2 text-muted">Дата публикации: </h6>
+            <p class="date card-text">
+                {{ product.publish|date:"SHORT_DATE_FORMAT" }}
+            </p>
+                <h6 class="card-subtitle mb-2 text-muted">Организация-автор: </h6>
+              <p class="author card-text">
+                {{ product.author }}
+            </p>
+                <h6 class="card-subtitle mb-2 text-muted">Описание: </h6>
+              <p class="card-text">{{ product.product_info|truncatewords:30|linebreaks }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{ product.status }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     {% endfor %}
 
     </div>

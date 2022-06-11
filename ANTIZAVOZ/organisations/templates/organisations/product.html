@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 {% block title %}{{ product_item.product_name }}{% endblock %}
-{% block content %}
+{% block main %}
+
+<div class="jumbotron container bg-light pb-1 mb-1">
+    <div class="row">
+        <div>
+            <!-- Карточка с названием проекта, описанием и датой создания -->
+            <div class="card shadow mt-3" data-bs-toggle="tooltip" data-bs-placement="left"
+                 title="Информация о проекте">
+                <div class="card-body">
+                    <h2 class="card-title">{{ product_item.product_name }}</h2>
+                    <h6 class="card-subtitle mb-2 text-muted">Дата регистрации продукта на портале: {{ product_item.publish }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Зарегистрировано:
+                        {{ product_item.author }}</h6>
+                    </br>
+                    <h6 class="card-subtitle mb-2 text-muted">Описание:</h6>
+                    <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.product_info|linebreaks }}</p>
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <h1>{{ product_item.product_name }}</h1>
     <p class="date">
         Зарегистрировано в системе: {{ product_item.publish }}, автор: {{ product_item.author }}
@@ -15,4 +40,4 @@
         Санкции на экспорт: {{ product_item.product_sanctions_import }}
     </p>
 
-{% endblock %}
+{% endblock main %}

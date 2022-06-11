@@ -27,7 +27,7 @@ class organisation(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     def __str__(self):
-        return f"{self.pk} {self.id_organisation} {self.organisation_okved} {self.organisation_category} {self.organisation_sanctions}"
+        return f"{self.organisation_name}"
 
     class Meta:
         verbose_name = 'База данных организаций'
@@ -56,7 +56,7 @@ class product(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
 
     def __str__(self):
-        return f"{self.pk} {self.product_name} {self.product_tags} {self.product_info} {self.product_sanctions_import} {self.product_sanctions_export}"
+        return f"{self.product_name}"
 
     class Meta:
         verbose_name = 'База данных продуктов'
