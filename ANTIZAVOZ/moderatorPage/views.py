@@ -3,19 +3,24 @@ from django.contrib.auth.decorators import login_required
 
 import requests
 from bs4 import BeautifulSoup as bs
-from django.apps import apps
+# from django.apps import apps
+from organisations.models import organisation
+from django.http import JsonResponse
+
 
 @login_required(login_url='/login')
 def moderate_page_request(request):
     return render(request, 'moderatorPage/moderatorPage.html', context={})
 
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def update_db():
+    print('HELLO')
     parse_rbk()
 
-def parse_rbk():
-    organisation = apps.get_model('organisations', 'organisation')
 
+def parse_rbk():
+    # organisation = apps.get_model('organisations', 'organisation')
+    print('parse!!!!')
     url = 'https://companies.rbc.ru/categories/'
     # payload = {"page":1,"per_page":15,"filters":{"status_code":"product","region_ids":[365]}}
     # page = requests.get(url, data=json.dumps(payload))
@@ -58,3 +63,4 @@ def parse_rbk():
             organisation.save()
             
         print('\n')
+    return JsonResponse({'TEST': 'all right'}, status=200)

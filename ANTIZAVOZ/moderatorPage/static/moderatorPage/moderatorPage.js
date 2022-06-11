@@ -10,7 +10,9 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: getCookie('csrftoken')
             },
             success: function (data) {
+                console.log(data)
                 alert(1)
+
                 // isScan = true;
                 // setTimeout(updateCardScanStatus, 500);
                 // Notiflix.Notify.Success('Обновление БД запущено!');
