@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup as bs
 # from django.apps import apps
 from organisations.models import organisation
 from django.http import JsonResponse
+import pandas as pd
 
 
 @login_required(login_url='/login')
@@ -63,4 +64,26 @@ def parse_rbk():
             organisation.save()
             
         print('\n')
+    return JsonResponse({'TEST': 'all right'}, status=200)
+
+
+PATH_TO_FILE_INFO_FIRM = "./static/Реестр_пром_предприятий_ИНН_название_са.xlsx"
+
+
+def parse_from_file():
+    dfs = pd.read_excel(PATH_TO_FILE_INFO_FIRM, engine="openpyxl")
+    print(len(dfs.values))
+    for i in dfs.values:
+        id = i[0]
+        INN = i[1]
+        name = i[2]
+        full_name = i[3]
+        site = i[4]
+
+        organisation.objects.create(
+            organisation_name=name,
+            organisation_inn=INN,
+            organisation_link=site)
+        organisation.save()
+
     return JsonResponse({'TEST': 'all right'}, status=200)

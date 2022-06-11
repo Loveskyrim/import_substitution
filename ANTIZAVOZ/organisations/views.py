@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import organisation
-
+import pandas
 # Отображает главную страницу сайта
 @login_required(login_url='/login')
 def products_request(request):
