@@ -3,34 +3,36 @@
 
 {% block main %}
 <!--Таблица продуктов-->
-<div class="container">
-	<br><br><br>
+<div class="card shadow mt-3 col-10" style="width: 100%;margin: 0 auto;" data-bs-toggle="tooltip" data-bs-placement="center"
+    title="Login">
+  <div class="card-body">
+		<br><br><br>
 
-	<table class="table table-bordered" id="productsTable" style="text-align: center;">
-		<thead class="table-success">
-			<tr>
-				<th>#</th>
-				<th>Продукт</th>
-				<th>Описание</th>
-				<th>Производитель</th>
-				<th>Дата регистрации</th>
-				<th>Санкции</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for product in products %}
-			<tr style="cursor: pointer;">
-				<th class="text-center align-middle" scope="row">{{forloop.counter}}</th>
-				<td class="text-left align-middle"><div style="color: #111;">{{product.product_name}}</div></td>
-				<td class="text-left align-middle">{{product.product_info}}</td>
-				<td class="text-left align-middle">{{ product.author }}</td>
-				<td class="text-left align-middle">{{ product.publish|date:'SHORT_DATE_FORMAT' }}</td>
-				<td class="text-left align-middle">{{product.product_sanctions_import}}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
+		<table class="table table-bordered" id="productsTable" style="text-align: center;">
+			<thead class="table-success">
+				<tr>
+					<th>#</th>
+					<th>Продукт</th>
+					<th>Описание</th>
+					<th>Производитель</th>
+					<th>Дата регистрации</th>
+					<th>Санкции</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+				<tr style="cursor: pointer;">
+					<th class="text-center align-middle" scope="row">{{forloop.counter}}</th>
+					<td class="text-left align-middle"><div style="color: #111;">{{product.product_name}}</div></td>
+					<td class="text-left align-middle">{{product.product_info}}</td>
+					<td class="text-left align-middle">{{ product.author }}</td>
+					<td class="text-left align-middle">{{ product.publish|date:'SHORT_DATE_FORMAT' }}</td>
+					<td class="text-left align-middle">{{product.product_sanctions_import}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 {% endblock main %}

@@ -4,184 +4,26 @@
 {% block title %}Портал импортозамещения{% endblock title %}
 
 {% block main %}
-<style>
-* {
-   margin: 0;
-   box-sizing: border-box;
-}
-body {
-   background: #39383F;
-   font-family: 'Montserrat Alternates', sans-serif;
-}
-.post-wrap {
-   max-width: 1120px;
-   margin: 0 auto;
-   display: flex;
-   justify-content: center;
-   flex-wrap: wrap;
-}
-.post-item {
-   padding: 15px;
-   cursor: pointer;
-}
-.post-item * {
-   transition: .3s linear;
-}
-.item-content {
-   background: #616064;
-   padding: 40px;
-}
-.item-icon {
-   margin-bottom: 20px;
-}
-.item-icon:before {
-   content: "";
-   font-family: FontAwesome;
-   color: #F09EA3;
-   font-size: 50px;
-   line-height: 1;
-}
-.item-icon.photo:before {
-   content: "\f030";
-}
-.item-icon.video:before {
-   content: "\f03d";
-}
-.item-icon.gift:before {
-   content: "\f06b";
-}
-.item-icon.group:before {
-   content: "\f0c0";
-}
-.item-icon.tree:before {
-   content: "\f1bb";
-}
-.item-icon.anchor:before {
-   content: "\f13d";
-}
-.post-item:hover .item-icon, .post-item:hover .item-body h3, .post-item:hover .item-body p {
-   transform: translateY(-8px);
-}
-.item-body {
-   color: #fff1e2;
-   font-size: 17px;
-}
-.item-body h3 {
-   font-weight: 500;
-   margin-bottom: 15px;
-   transition-delay: .05s;
-}
-.item-body p {
-   transition-delay: .1s;
-}
-.item-footer {
-   padding-top: 15px;
-}
-.link {
-   text-decoration: none;
-   display: inline-block;
-   overflow: hidden;
-   position: relative;
-   padding-right: 30px;
-   font-size: 12px;
-   text-transform: uppercase;
-   font-weight: 600;
-   color: #F5E2CD;
-}
-.link:before {
-   content: "";
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   bottom: 0;
-   height: .125rem;
-   margin: auto;
-   background: #F09EA3;
-   transform: scaleX(.2);
-   transform-origin: left center;
-   z-index: 0;
-   transition: .6s cubic-bezier(.6, .01, 0, 1);
-}
-.link span {
-   display: inline-block;
-   position: relative;
-   transform: translateX(-200%);
-   transition: .6s cubic-bezier(.6, .01, 0, 1);
-}
-.post-item:hover .link span {
-   transform: translateX(0%);
-}
-.post-item:hover .link:before {
-   transform-origin: right center;
-}
-@media (min-width: 768px) {
-   .post-item {
-      flex-basis: 50%;
-      flex-shrink: 0;
-   }
-}
-@media (min-width: 960px) {
-   .post-item {
-      flex-basis: 33.333333333%;
-   }
-}
-.sliding-button {
-  text-decoration: none;
-  color: black;
-  display: inline-block;
-  position: relative;
-  padding: 15px 30px;
-  border: 1px solid;
-  border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
-  border-image-slice: 1;
-  margin: 10px 20px;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  overflow: hidden;
-  letter-spacing: 2px;
-  transition: .8s cubic-bezier(.165, .84, .44, 1);
-}
-.sliding-button:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 0;
-  width: 100%;
-  z-index: -1;
-  color: black;
-  background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
-  transition: .8s cubic-bezier(.165, .84, .44, 1);
-}
-.sliding-button:hover {
-  background: rgba(255, 255, 255, 0);
-}
-.sliding-button:hover:before {
-  bottom: 0%;
-  top: auto;
-  height: 100%;
-}
-
-</style>
-
-<section class="jumbotron text-center bg-white">
+<section class="jumbotron text-center bg-dark">
     <div class="container">
-        <p class="lead text-muted">Сервис по сбору и анализу информации о продукции производителей Москвы для развития импортозамещения</p>
-
-        <div class="input-group">
-            <input type="search" class="form-control rounded" placeholder="Товар или услуга" aria-label="Search" aria-describedby="search-addon" />
-            <button type="button" class="btn btn-outline-primary">Поиск</button>
+        <p class="head-text">Сервис по сбору и анализу информации о продукции производителей Москвы для развития импортозамещения</p>
+        <div class="d1">
+            <form class="input-group">
+                <input type="text" class="form-control rounded" placeholder="Искать товар...">
+                <button type="submit"><img src="{% static 'mainPage/img/searchArrow.svg' %}" ></button>
+            </form>
         </div>
     </div>
 </section>
 
-        <div><p class="lead text-muted">Зарегистрированные Вами организации</p></div>
-<button type="button" class="sliding-button" data-toggle="modal"
-                data-target="#addCompanyInfoModal">Добавить</button>
+<section class="text-center">
+        <div><p class="head-text">Зарегистрированные Вами организации</p></div>
+        <button type="button" class="sliding-button" data-toggle="modal"
+                        data-target="#addCompanyInfoModal">Добавить</button>
+</section>
 
-<section class="jumbotron text-center bg-grey">
-    <div class="album py-2 bg-grey">
+<section class="jumbotron text-center bg-dark">
+    <div class="album bg-dark">
     <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for organisation in organisations %}
@@ -190,7 +32,7 @@ body {
             <div class="card mb-4 shadow-sm" data-bs-toggle="tooltip" data-bs-placement="left"
                  title="Информация о зарегистрированных организациях">
                 <div class="card-body">
-                    <h3 class="card-title"><a href="organisation/{{ organisation.publish|date:'SHORT_DATE_FORMAT' }}/{{ organisation.slug }}">{{ organisation.organisation_name }}</a></h3>
+                    <h3 class="card-title"><a href="organisations/{{ organisation.organisation_inn }}">{{ organisation.organisation_name }}</a></h3>
                     <h6 class="card-subtitle mb-2 text-muted">Дата регистрации организации на портале: {{ organisation.publish }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">ОК ВЭД: </h6>{{ organisation.organisation_okved }}
                     <h6 class="card-subtitle mb-2 text-muted">Категория: </h6>{{ organisation.organisation_category }}
@@ -206,14 +48,11 @@ body {
 
         {% endfor %}
     </div>
-<!--        <div class="input-group">-->
-<!--            <input type="search" class="form-control rounded" placeholder="Товар или услуга" aria-label="Search" aria-describedby="search-addon" />-->
-<!--            <button type="button" class="btn btn-outline-primary">Поиск</button>-->
-<!--        </div>-->
+
     </div>
     </div>
 </section>
-
+<!-- 
         <p class="lead text-muted">Продукты Ваших организаций</p>
 
 
@@ -221,39 +60,34 @@ body {
 <div class="album py-2 bg-grey">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {% for product in products %}
+        {% for product in products %}
 
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-<!--            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
-
-            <div class="card-body">
-                <h2>
-                <a href="product/{{ product.publish|date:'SHORT_DATE_FORMAT' }}/{{ product.slug }}">{{ product.product_name }}</a>
-            </h2>
-                <h6 class="card-subtitle mb-2 text-muted">Дата публикации: </h6>
-            <p class="date card-text">
-                {{ product.publish|date:"SHORT_DATE_FORMAT" }}
-            </p>
-                <h6 class="card-subtitle mb-2 text-muted">Организация-автор: </h6>
-              <p class="author card-text">
-                {{ product.author }}
-            </p>
-                <h6 class="card-subtitle mb-2 text-muted">Описание: </h6>
-              <p class="card-text">{{ product.product_info|truncatewords:30|linebreaks }}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">{{ product.status }}</small>
-              </div>
+            <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h2>
+                    <a href="product/{{ product.publish|date:'SHORT_DATE_FORMAT' }}/{{ product.slug }}">{{ product.product_name }}</a>
+                </h2>
+                    <h6 class="card-subtitle mb-2 text-muted">Дата публикации: </h6>
+                <p class="date card-text">
+                    {{ product.publish|date:"SHORT_DATE_FORMAT" }}
+                </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Организация-автор: </h6>
+                <p class="author card-text">
+                    {{ product.author }}
+                </p>
+                    <h6 class="card-subtitle mb-2 text-muted">Описание: </h6>
+                <p class="card-text">{{ product.product_info|truncatewords:30|linebreaks }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">{{ product.status }}</small>
+                </div>
+                </div>
             </div>
-          </div>
+            </div>
+        {% endfor %}
         </div>
-
-
-
-    {% endfor %}
-</div>
     </div>
-</div>
+</div> -->
 
 </section>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -307,4 +141,5 @@ body {
 {% block scripts %}
 
 <script src="{% static 'mainPage/main.js' %}"></script>
+<script src="{% static 'mainPage/mainPage.css' %}"></script>
 {% endblock scripts %}

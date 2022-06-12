@@ -50,7 +50,7 @@ def product_list(request):
     organisations = organisation.objects.filter(author=User.objects.get(username=request.user))
     products = product.objects.filter(author__in=organisations, status__in=('registered', 'Registered'))
     # products = product.objects.all()
-    return render(request, 'mainPage/mainPage.html', context={'form': createOrganisationModalForm, 'organisations': organisations, 'products': products})
+    return render(request, 'mainPage/mainPage.html', context={'form': createOrganisationModalForm, 'organisations': organisations[:10], 'products': products})
 
 
 @login_required(login_url='/login')

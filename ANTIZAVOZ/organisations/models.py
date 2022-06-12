@@ -28,6 +28,16 @@ class organisation(models.Model):
 
     def __str__(self):
         return f"{self.organisation_name}"
+    
+    def get_data(self):
+        return{
+            "organisation_name": f"{self.organisation_name}",
+            "organisation_inn": f"{self.organisation_inn}",
+            "organisation_okved": f"{self.organisation_okved}",
+            "organisation_category": f"{self.organisation_category}",
+            "organisation_sanctions": f"{self.organisation_sanctions}",
+            "organisation_link": f"{self.organisation_link}"
+            }
 
     class Meta:
         verbose_name = 'База данных организаций'
@@ -35,6 +45,7 @@ class organisation(models.Model):
         ordering = ['-id_organisation', '-organisation_okved', '-organisation_category',
                     '-organisation_description', '-organisation_principal', '-organisation_link',
                     '-organisation_sanctions']
+
 
 
 class product(models.Model):
@@ -67,3 +78,5 @@ class product(models.Model):
         verbose_name_plural = 'Базы данных продуктов'
         ordering = ['-product_name', '-product_tags', '-product_info', '-product_sanctions_import',
                     '-product_sanctions_export']
+
+
