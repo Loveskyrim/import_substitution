@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 
 class organisation(models.Model):
@@ -60,7 +61,7 @@ class product(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    product_tags = models.CharField(max_length=100, verbose_name=u"Тэг", blank=True)
+    product_tags = TaggableManager()
     product_info = models.TextField(verbose_name=u"Информация о продукте", blank=True)
     product_sanctions_import = models.CharField(max_length=8, verbose_name=u"Санкции на импорт", blank=True)
     product_sanctions_export = models.CharField(max_length=8, verbose_name=u"Санкции на экспорт", blank=True)
@@ -76,7 +77,7 @@ class product(models.Model):
     class Meta:
         verbose_name = 'База данных продуктов'
         verbose_name_plural = 'Базы данных продуктов'
-        ordering = ['-product_name', '-product_tags', '-product_info', '-product_sanctions_import',
+        ordering = ['-product_name', '-product_info', '-product_sanctions_import',
                     '-product_sanctions_export']
 
 

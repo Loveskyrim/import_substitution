@@ -2,12 +2,21 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import organisation, product
+from taggit.models import Tag
+from django.db.models import Count
 
 
 @login_required(login_url='/login')
-def products_request(request):
+def products_request(request, tag_slug=None):
     products_list = product.objects.all()
-    return render(request, 'organisations/productsList.html', {"products": products_list})
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        products_list = products_list.filter(product_tags__in=[tag])
+
+    return render(request, 'organisations/productsList.html', {"products": products_list,
+                                                               "tag": tag})
 
 
 @login_required(login_url='/login')
@@ -17,7 +26,14 @@ def product_request(request, publish, prod):
                                      publish__year=publish.split('.')[2],
                                      publish__month=publish.split('.')[1],
                                      publish__day=publish.split('.')[0])
-    return render(request, 'organisations/product.html', context={'product_item': product_item})
+    product_tags_ids = product_item.product_tags.values_list('id', flat=True)
+    similar_products = product.objects.filter(product_tags__in=product_tags_ids).exclude(id_product=product_item.id_product)
+    print('Похожее:', similar_products)
+    similar_products = similar_products.annotate(same_tags=Count('product_tags')).order_by('-same_tags', '-publish')[:4]
+
+    return render(request, 'organisations/product.html', context={'product_item': product_item,
+                                                                  'similar_products': similar_products})
+
 
 @login_required(login_url='/login')
 def update_product(request):
@@ -49,6 +65,7 @@ def update_product(request):
             print('error')
             return JsonResponse({}, status=400)
     return JsonResponse({}, status=400)
+
 
 def organisation_request(request, inn):
     org_item = get_object_or_404(organisation, organisation_inn=inn)

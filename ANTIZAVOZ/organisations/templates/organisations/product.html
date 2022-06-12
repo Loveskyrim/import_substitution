@@ -8,9 +8,16 @@
         <div class="col-8">
             <!-- Карточка с названием продукта, описанием и датой создания -->
             <div class="card shadow mt-3" data-bs-toggle="tooltip" data-bs-placement="left"
-                 title="Информация о проекте">
+                 title="Информация о продукте">
                 <div class="card-body">
                     <h2 class="card-title text-center">{{ product_item.product_name }}</h2>
+                    <p class="tags">Категории:
+                        {% for tag in product_item.product_tags.all %}
+                            <a href="{% url 'post_list_by_tag' tag.slug %}">
+                                {{ tag.name }}
+                            </a>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}</p>
                     <h6 class="card-subtitle mb-2 text-muted">Дата регистрации продукта на портале: {{ product_item.publish }}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Зарегистрировано:</h6>
                     <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.author }}</p>
@@ -51,14 +58,24 @@
                 </div>
         </div>
 
+            <div>
+                <h2>Похожее по категории</h2>
+                {% for product in similar_products %}
+                    <p>
+                        <a href="/products/{{ product.publish|date:'SHORT_DATE_FORMAT' }}/{{ product.product_name }}">{{ product.product_name }}</a>
+                    </p>
+                {% empty %}
+                    Пока ничего похожего нет
+                {% endfor %}
 
+            </div>
 
 
 
             </div>
         </div>
     </div>
-</div>
+
 
 
     <div>

@@ -3,13 +3,13 @@
 {% block title %}{{ organisation_item.organisation_name }}{% endblock %}
 {% block main %}
 <style>
-* {
-   margin: 0;
-   box-sizing: border-box;
+
+.sliding-button{
+   margin-bottom: 10%;
 }
 </style>
 
-
+<div class="jumbotron container bg-dark pb-1 mb-1">
 <div class="post-wrap">
    <div class="post-item">
    <div class="item-content">
@@ -70,14 +70,14 @@
 
 
 </div>
-   <section class="text-center">
+
+   <div class="text-center">
       <button type="button" class="sliding-button" data-toggle="modal"
                 data-target="#editCompanyInfoModal">Редактировать</button>
-   </section>
-    
+   </div>
 <div>
    
     {% include "representativePage/editCompanyModal.html" %}
 </div>
-
+</div>
 {% endblock main %}

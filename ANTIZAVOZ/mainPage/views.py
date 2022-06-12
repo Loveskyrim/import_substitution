@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.template.defaultfilters import slugify
 from django.utils.formats import date_format
 from unidecode import unidecode
+from django.db.models import Count
 
 
 def product_list(request):
@@ -60,7 +61,13 @@ def product_detail(request, publish, prod):
                                      publish__year=publish.split('.')[2],
                                      publish__month=publish.split('.')[1],
                                      publish__day=publish.split('.')[0])
-    return render(request, 'organisations/product.html', context={'product_item': product_item})
+    product_tags_ids = product_item.product_tags.values_list('id_product', flat=True)
+    similar_products = product.objects.filter(product_tags__in=product_tags_ids).exclude(id_product=product_item.id_product)
+    print('Похожее:', similar_products)
+    similar_products = similar_products.annotate(same_tags=Count('product_tags')).order_by('-same_tags', '-publish')[:4]
+
+    return render(request, 'organisations/product.html', context={'product_item': product_item,
+                                                                  'similar_products': similar_products})
 
 
 @login_required(login_url='/login')
