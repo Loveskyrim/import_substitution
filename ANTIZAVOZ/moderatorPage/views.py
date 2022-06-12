@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .tasks import parse_rbk, parse_from_file
+from .tasks import parse_rbk, parse_from_file, parse_product_db
 from django.http import JsonResponse
 
 
@@ -11,7 +11,10 @@ def moderate_page_request(request):
 
 # @login_required(login_url='/login')
 def update_db(request):
-    print('HELLO')
     parse_from_file.delay()
-    parse_rbk.delay()
+    # parse_rbk.delay()
+    return JsonResponse({'TEST': 'all right'}, status=200)
+
+def parse_product_by_db(request):
+    parse_product_db.delay()
     return JsonResponse({'TEST': 'all right'}, status=200)

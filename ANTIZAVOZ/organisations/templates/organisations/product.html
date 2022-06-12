@@ -5,27 +5,65 @@
 
 <div class="jumbotron container bg-light pb-1 mb-1">
     <div class="row">
-        <div>
-            <!-- Карточка с названием проекта, описанием и датой создания -->
+        <div class="col-8">
+            <!-- Карточка с названием продукта, описанием и датой создания -->
             <div class="card shadow mt-3" data-bs-toggle="tooltip" data-bs-placement="left"
                  title="Информация о проекте">
                 <div class="card-body">
-                    <h2 class="card-title">{{ product_item.product_name }}</h2>
+                    <h2 class="card-title text-center">{{ product_item.product_name }}</h2>
                     <h6 class="card-subtitle mb-2 text-muted">Дата регистрации продукта на портале: {{ product_item.publish }}</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">Зарегистрировано:
-                        {{ product_item.author }}</h6>
-                    </br>
+                    <h6 class="card-subtitle mb-2 text-muted">Зарегистрировано:</h6>
+                    <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.author }}</p>
+
                     <h6 class="card-subtitle mb-2 text-muted">Описание:</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">Санкции на импорт::
-                        {{ product_item.product_sanctions_import }}</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">Санкции на экспорт::
-                        {{ product_item.product_sanctions_export }}</h6>
                     <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.product_info|linebreaks }}</p>
+
+                    <p class="product_sanctions_import text-muted">
+                        Санкции на импорт: {{ product_item.product_sanctions_import }}
+                    </p>
+                    <p class="product_sanctions_import text-muted">
+                        Санкции на экспорт: {{ product_item.product_sanctions_import }}
+                    </p>
+
+                    {% if user.is_superuser %}
+                    <button id="edit_project_info" type="button" class="btn btn-link btn-block"
+                            data-bs-toggle="tooltip" data-bs-placement="left" data-toggle="modal"
+                            data-target="#editProductModal">Редактировать
+                    </button>
+                    {% endif %}
                 </div>
+            </div>
+            <div style="text-align:center;">
+                <button id="check-product" type="button" class="btn btn-outline-primary mt-3 data-bs-placement='center'" style="width: 30%;">
+                    Уточнить информацию <br>у поставщика
+                    <img class="img-center" style="width: 10%;" src="{% static 'img/choices.png' %}">
+                </button>
+            </div>
+
+
+        </div>
+
+        <div class="col-4">
+            <div class="card shadow  mt-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                title="Изображение">
+                <div class="card-body">
+                    <img class="img-center" style="width: 100%;" src="{% static 'img/courier.png' %}">
+                </div>
+        </div>
+
+
+
+
+
             </div>
         </div>
     </div>
 </div>
+
+
+    <div>
+        {% include "./editProductModal.html" %}
+    </div>
 
 
 <div>

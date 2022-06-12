@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var $updateDB = $('#update-db')
+    var $updateProductDB = $('#update-product-db')
 
     $updateDB.click(function() {
-        // $updateDB.prop('disabled', true);
         $.ajax({
             type: 'POST',
             url: '/moderate/update_database',
@@ -17,8 +17,23 @@ $(document).ready(function () {
                 // Notiflix.Notify.Failure('ajax error');
             }
         });
+    });
 
-
+    $updateProductDB.click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/moderate/update_productsdb',
+            data: {
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            },
+            success: function (data) {
+                console.log(data)
+                // Notiflix.Notify.Success('Обновление БД запущено!');
+            },
+            error: function (error) {
+                // Notiflix.Notify.Failure('ajax error');
+            }
+        });
     });
 
     function getCookie(name) {
