@@ -2,62 +2,47 @@
 {% load static %}
 
 {% block main %}
+<!--Таблица продуктов-->
+<div class="container">
+	<br><br><br>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<h4 class="mt-2">Каталог продукции</h4>
-			</div>
-			<div class="col-md-6">
-				<form id="filter-form">
-					<div class="d-flex bd-highlight justify-content-end">
-						<div class="p-2 bd-highlight">
-							<div class="form-group">
-							</div>
-						</div>
-						<div class="p-2 bd-highlight">
-							<input type="submit" name="submit" class="btn btn-primary d-inline"></div>
-						</div>
+	<table class="table table-bordered" id="productsTable" style="text-align: center;">
+		<thead class="table-success">
+			<tr>
+				<th>#</th>
+				<th>Продукт</th>
+				<th>Описание</th>
+				<th>Производитель</th>
+				<th>Санкции</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+			<tr style="cursor: pointer;">
+				<th class="text-center align-middle" scope="row">{{forloop.counter}}</th>
+				<td class="text-left align-middle"><div style="color: #111;">{{product.product_name}}</div></td>
+				<td class="text-left align-middle">{{product.product_info}}</td>
+				<td class="text-left align-middle"></td>
+				<td class="text-left align-middle">{{product.product_sanctions_import}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-
-					</form>
-				</div>
-				<hr>
-				<div class="table-responsive">
-					<table class="table table-bordered" id="productsTable">
-						<thead>
-							<tr>
-                                <th>Изображение</th>
-								<th>Продукт</th>
-								<th>Описание</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-			</div>
-	</div>
+</div>
 
 {% endblock main %}
 
 {% block scripts %}
 
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css">
 <link rel="stylesheet" href="{% static 'css/hide.css'%}" type="text/css">
-
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 
-<script>
-    var vunl_type_from_jinja = "{{vulne_type_from_db}}";
-    var packname = "{{now_packet}}";
-    var packversion = "{{packet_version}}";
-    var projectname = "{{now_project}}";
-
-</script>
 <script src="{% static 'organisations/productsList.js' %}"></script>
 
 {% endblock scripts %}

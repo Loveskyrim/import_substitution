@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{ product_item.product_name }}{% endblock %}
 {% block main %}
 
@@ -16,7 +17,6 @@
                     </br>
                     <h6 class="card-subtitle mb-2 text-muted">Описание:</h6>
                     <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.product_info|linebreaks }}</p>
-
                 </div>
             </div>
 
@@ -40,4 +40,15 @@
         Санкции на экспорт: {{ product_item.product_sanctions_import }}
     </p>
 
+    <div>
+        {% include "./editProductModal.html" %}
+    </div>
+
 {% endblock main %}
+
+
+{% block scripts %}
+
+<script src="{% static 'organisations/editProduct.js' %}"></script>
+
+{% endblock scripts %}
