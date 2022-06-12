@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import organisation, product
+from .models import organisation, product, okved
 
 
 class OrganisationAdmin(admin.ModelAdmin):
@@ -19,7 +19,16 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('product_name',)}
     ordering = ['product_name']
 
+class OkvedAdmin(admin.ModelAdmin):
+    "Админка номера ОКВЭД"""
+    list_display = ('id_okved', 'name', 'description')
+    list_filter = ('id_okved', 'name', 'description')
+    search_fields = ('id_okved', 'name', 'description')
+    ordering = ['id_okved']
+
 
 admin.site.register(organisation, OrganisationAdmin)
 admin.site.register(product, ProductAdmin)
+admin.site.register(okved, OkvedAdmin)
+
 

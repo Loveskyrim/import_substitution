@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 from django.utils.formats import date_format
 from unidecode import unidecode
 
-
+@login_required(login_url='/login')
 def product_list(request):
     ready_modalForm = createOrganisationFormModal(request.POST)
     if ready_modalForm.is_valid():

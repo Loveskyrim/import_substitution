@@ -60,7 +60,7 @@ class product(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    product_tags = models.CharField(max_length=100, verbose_name=u"Тэг", blank=True)
+    product_tags = models.CharField(max_length=200, verbose_name=u"Тэг", blank=True)
     product_info = models.TextField(verbose_name=u"Информация о продукте", blank=True)
     product_sanctions_import = models.CharField(max_length=8, verbose_name=u"Санкции на импорт", blank=True)
     product_sanctions_export = models.CharField(max_length=8, verbose_name=u"Санкции на экспорт", blank=True)
@@ -78,5 +78,18 @@ class product(models.Model):
         verbose_name_plural = 'Базы данных продуктов'
         ordering = ['-product_name', '-product_tags', '-product_info', '-product_sanctions_import',
                     '-product_sanctions_export']
+
+class okved(models.Model):
+    id_okved = models.CharField(max_length=10, verbose_name=u"Номер")
+    name = models.CharField(max_length=2048, verbose_name=u"Название")
+    description = models.CharField(max_length=10000, verbose_name=u"Описание")
+
+    def __str__(self):
+        return f"{self.id_okved}"
+    
+    class Meta:
+        verbose_name = 'База данных ОКВЭД'
+        verbose_name_plural = 'Базы данных ОКВЭД'
+        ordering = ['-id_okved', '-name', '-description']
 
 

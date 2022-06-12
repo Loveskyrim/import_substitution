@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .tasks import parse_rbk, parse_from_file, parse_product_db
+from .tasks import parse_rbk, parse_from_file, parse_product_db, parse_okved_db, parse_fabricator_db
 from django.http import JsonResponse
 
 
@@ -17,4 +17,12 @@ def update_db(request):
 
 def parse_product_by_db(request):
     parse_product_db.delay()
+    return JsonResponse({'TEST': 'all right'}, status=200)
+
+def parse_okved(request):
+    parse_okved_db.delay()
+    return JsonResponse({'TEST': 'all right'}, status=200)
+
+def parse_fabricator(request):
+    parse_fabricator_db.delay()
     return JsonResponse({'TEST': 'all right'}, status=200)
