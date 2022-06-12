@@ -1,6 +1,8 @@
 $(document).ready(function () {
     var $updateDB = $('#update-db')
     var $updateProductDB = $('#update-product-db')
+    var $updateOkvedDB = $('#update-okved')
+    var $parseFabricatorDB = $('#parse-fabricator')
 
     $updateDB.click(function() {
         $.ajax({
@@ -11,10 +13,8 @@ $(document).ready(function () {
             },
             success: function (data) {
                 console.log(data)
-                // Notiflix.Notify.Success('Обновление БД запущено!');
             },
             error: function (error) {
-                // Notiflix.Notify.Failure('ajax error');
             }
         });
     });
@@ -28,13 +28,42 @@ $(document).ready(function () {
             },
             success: function (data) {
                 console.log(data)
-                // Notiflix.Notify.Success('Обновление БД запущено!');
             },
             error: function (error) {
-                // Notiflix.Notify.Failure('ajax error');
             }
         });
     });
+
+    $updateOkvedDB.click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/moderate/update_okveddb',
+            data: {
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            },
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (error) {
+            }
+        });
+    });
+
+    $parseFabricatorDB.click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/moderate/parse_fabricatordb',
+            data: {
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            },
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (error) {
+            }
+        });
+    });
+
 
     function getCookie(name) {
         var cookieValue = null;
