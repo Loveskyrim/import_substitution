@@ -1,28 +1,71 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from organisations.models import *
 import datetime
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .forms import createOrganisationFormModal
+from django.contrib import messages
+from django.template.defaultfilters import slugify
+from django.utils.formats import date_format
+from unidecode import unidecode
 
 
 def product_list(request):
+    ready_modalForm = createOrganisationFormModal(request.POST)
+    if ready_modalForm.is_valid():
+        try:
+            if '/' in ready_modalForm.cleaned_data['organisation_name']:
+                messages.error(
+                    request,
+                    "Ошибка! Символ слеша в имени: " + ready_modalForm.cleaned_data['organisation_name'])
+                return redirect('/index')
+
+            if len(ready_modalForm.cleaned_data['organisation_name']) > 200:
+                messages.error(
+                    request,
+                    "Ошибка! Длина имени не должна превышать 200 символов!")
+                return redirect('/index')
+            print(slugify(unidecode(ready_modalForm.cleaned_data['organisation_name'])))
+            new_organisation = organisation.objects.create(
+                organisation_name=ready_modalForm.cleaned_data['organisation_name'],
+                organisation_adress=ready_modalForm.cleaned_data['organisation_adress'],
+                author=User.objects.get(username=request.user),
+                organisation_inn=ready_modalForm.cleaned_data['organisation_inn'],
+                organisation_okved=ready_modalForm.cleaned_data['organisation_okved'],
+                slug=slugify(unidecode(ready_modalForm.cleaned_data['organisation_name'])),
+                status='draft')
+            messages.success(
+                request, "Организация " + ready_modalForm.cleaned_data['organisation_name'] + " успешно создана!")
+        except Exception as e:
+            print(e)
+            messages.error(
+                request, "Организация " + ready_modalForm.cleaned_data['organisation_name'] + " уже существует!")
+            return redirect('/index')
+        if 'continue' in request.POST:
+
+            return redirect(f"organisation/{str(date_format(new_organisation.publish, format='SHORT_DATE_FORMAT', use_l10n=True))}/{slugify(unidecode(ready_modalForm.cleaned_data['organisation_name']))}")
+
+    createOrganisationModalForm = createOrganisationFormModal()
+
     organisations = organisation.objects.filter(author=User.objects.get(username=request.user))
     products = product.objects.filter(author__in=organisations, status__in=('registered', 'Registered'))
     # products = product.objects.all()
-    return render(request, 'mainPage/mainPage.html', context={'organisations': organisations, 'products': products})
+    return render(request, 'mainPage/mainPage.html', context={'form': createOrganisationModalForm, 'organisations': organisations, 'products': products})
 
 
+@login_required(login_url='/login')
 def product_detail(request, publish, prod):
+
     product_item = get_object_or_404(product, slug=prod,
-                                     status='registered',
                                      publish__year=publish.split('.')[2],
                                      publish__month=publish.split('.')[1],
                                      publish__day=publish.split('.')[0])
     return render(request, 'organisations/product.html', context={'product_item': product_item})
 
 
+@login_required(login_url='/login')
 def organisation_detail(request, publish, prod):
     organisation_item = get_object_or_404(organisation, slug=prod,
-                                          status='registered',
                                           publish__year=publish.split('.')[2],
                                           publish__month=publish.split('.')[1],
                                           publish__day=publish.split('.')[0])

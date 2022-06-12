@@ -16,33 +16,21 @@
                         {{ product_item.author }}</h6>
                     </br>
                     <h6 class="card-subtitle mb-2 text-muted">Описание:</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Санкции на импорт::
+                        {{ product_item.product_sanctions_import }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Санкции на экспорт::
+                        {{ product_item.product_sanctions_export }}</h6>
                     <p class="card-text" style="white-space: pre-wrap; word-wrap: break-word;">{{ product_item.product_info|linebreaks }}</p>
                 </div>
-            </div>
-
             </div>
         </div>
     </div>
 </div>
 
 
-    <h1>{{ product_item.product_name }}</h1>
-    <p class="date">
-        Зарегистрировано в системе: {{ product_item.publish }}, автор: {{ product_item.author }}
-    </p>
-    <p class="product_info">
-        Инфо: {{ product_item.product_info|linebreaks }}
-    </p>
-    <p class="product_sanctions_import">
-        Санкции на импорт: {{ product_item.product_sanctions_import }}
-    </p>
-    <p class="product_sanctions_import">
-        Санкции на экспорт: {{ product_item.product_sanctions_import }}
-    </p>
-
-    <div>
-        {% include "./editProductModal.html" %}
-    </div>
+<div>
+    {% include "./editProductModal.html" %}
+</div>
 
 {% endblock main %}
 

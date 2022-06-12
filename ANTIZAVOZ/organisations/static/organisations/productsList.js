@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 			"columnDefs": [
 			{
-				"targets": 4,
+				"targets": 2,
 				"orderable": false
 			},
 		]
@@ -37,8 +37,13 @@ $(document).ready(function () {
     $('#productsTable tbody').on('click', 'tr', function () {
         // переход к проекту по нажатию на  него в строке таблицы
         var data = table.row(this).data();
-        var product_name = $(data[1]).text()
-        document.location.href = "products" + '/' + product_name;
+        console.log(data)
+        var product_publish = data[4];
+        console.log(product_publish)
+        var product_name = $(data[1]).text();
+        console.log(product_name)
+
+        document.location.href = "products/" + product_publish + "/" + product_name;
     });
 
     $(function() {

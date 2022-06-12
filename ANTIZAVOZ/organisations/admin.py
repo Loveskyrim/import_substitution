@@ -4,7 +4,7 @@ from .models import organisation, product
 
 class OrganisationAdmin(admin.ModelAdmin):
     "Админка организации"""
-    list_display = ('id_organisation', 'organisation_name', 'organisation_okved', 'organisation_category', 'organisation_sanctions')
+    list_display = ('organisation_name', 'organisation_okved', 'organisation_category', 'organisation_sanctions')
     list_filter = ('organisation_name', 'organisation_okved', 'organisation_category', 'organisation_sanctions')
     search_fields = ('organisation_name', 'organisation_okved', 'organisation_category')
     prepopulated_fields = {'slug': ('organisation_name',)}

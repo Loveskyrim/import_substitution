@@ -13,6 +13,7 @@
 				<th>Продукт</th>
 				<th>Описание</th>
 				<th>Производитель</th>
+				<th>Дата регистрации</th>
 				<th>Санкции</th>
 			</tr>
 		</thead>
@@ -22,7 +23,8 @@
 				<th class="text-center align-middle" scope="row">{{forloop.counter}}</th>
 				<td class="text-left align-middle"><div style="color: #111;">{{product.product_name}}</div></td>
 				<td class="text-left align-middle">{{product.product_info}}</td>
-				<td class="text-left align-middle"></td>
+				<td class="text-left align-middle">{{ product.author }}</td>
+				<td class="text-left align-middle">{{ product.publish|date:'SHORT_DATE_FORMAT' }}</td>
 				<td class="text-left align-middle">{{product.product_sanctions_import}}</td>
 			</tr>
 			{% endfor %}

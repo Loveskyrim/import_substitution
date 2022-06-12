@@ -1,24 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import organisation, product
 
 
 @login_required(login_url='/login')
 def products_request(request):
-    products_list = product.objects.all
+    products_list = product.objects.all()
     return render(request, 'organisations/productsList.html', {"products": products_list})
 
-@login_required(login_url='/login')
-def product_request(request, product_from_url):
-    """функция, отображающая страницу конкретного проекта"""
-    try:
-        # проверить если ли такой проект в таблице проектов
-        current_product = product.objects.get(product_name=product_from_url)
-    except Exception as e:
-        print(e)
-        return render(request, 'product/404.html')
 
-    return render(request, 'organisations/product.html', context={'product_item': current_product})
+@login_required(login_url='/login')
+def product_request(request, publish, prod):
+    print(prod)
+    product_item = get_object_or_404(product, product_name=prod,
+                                     publish__year=publish.split('.')[2],
+                                     publish__month=publish.split('.')[1],
+                                     publish__day=publish.split('.')[0])
+    return render(request, 'organisations/product.html', context={'product_item': product_item})
 
 
 @login_required(login_url='/login')
