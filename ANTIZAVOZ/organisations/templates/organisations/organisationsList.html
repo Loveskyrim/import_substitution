@@ -57,13 +57,13 @@ li
 					</tr>
 				</thead>
 				<!--data from db-->
-				{% for employee in employees %}
+				{% for organisation in organisations %}
 				<tr>
-					<td><li><a style="color: #111;" href=" ">{{employee.organisation_name}}</a></li></td>
-					<td>{{employee.organisation_okved}}</td>
-					<td>{{employee.organisation_category}}</td>
-					<td>{{employee.organisation_sanctions}}</td>
-					<td>{{employee.organisation_link}}</td>
+					<td><li><a style="color: #111;" href="organisation/{{ organisation.publish|date:'SHORT_DATE_FORMAT' }}/{{ organisation.slug }}">{{organisation.organisation_name}}</a></li></td>
+					<td>{{organisation.organisation_okved}}</td>
+					<td>{{organisation.organisation_category}}</td>
+					<td>{{organisation.organisation_sanctions}}</td>
+					<td>{{organisation.organisation_link}}</td>
 				</tr>
 				{% endfor %}
 			</table>

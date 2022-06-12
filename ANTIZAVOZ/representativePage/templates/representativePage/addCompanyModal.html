@@ -1,4 +1,4 @@
-<div class="modal fade" id="editProjectInfoModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="addCompanyInfoModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,32 +13,32 @@
                     <div class="form-group my-2">
                         <label  for="companyName">Компания, которую вы представляете</label>
                         <textarea id="companyNameText" type="text"  class="form-control"
-                                  rows="10"></textarea>
+                                  rows="2"></textarea>
                     </div>
 
                     <div class="form-group my-2">
-                        <label for="companyAddress">ИНН</label>
+                        <label for="companyAddress">Адрес</label>
                         <textarea id="companyAddressText" type="text"  class="form-control"
-                                  rows="10"></textarea>
+                                  rows="2"></textarea>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="companyInn">ИНН</label>
                         <textarea id="companyInnText" type="text"  class="form-control"
-                                  rows="10"></textarea>
+                                  rows="1"></textarea>
                     </div>
 
                     <div class="form-group my-2">
                         <label for="companyOkved">Вид деятельности (ОКВЭД)</label>
                         <textarea id="companyOkvedText" type="text"  class="form-control"
-                                  rows="10">TODO Выпадающий список</textarea>
+                                  rows="1">TODO Выпадающий список</textarea>
                     </div>
  
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" id="addCompanyData" class="btn btn-success" name="continue">Отправить на модерацию</button>
+                    <a type="button" id="addCompanyData" class="btn btn-success" href="organisation_create" name="continue">Отправить на модерацию</a>
                 </div>
             </form>
         </div>
