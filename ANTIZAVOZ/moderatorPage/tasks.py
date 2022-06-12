@@ -113,7 +113,7 @@ ACTUAL_CATEGORIES_FABRICATOR = [['12430','Лесная промышленнос�
 ['12422','Легкая промышленность']]
 URL = 'https://fabricators.ru/zavody?region=11800&product=12474'
 HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0', 'accept': '*/*'}
-
+graf_array = []
 
 def get_html(url, params=None):
     r = requests.get(url, headers=HEADERS, params=params)
@@ -154,29 +154,37 @@ def get_content(html, category):
 
     promisel = []
     for item in items:
-        organisation_name=item.find('a', class_='title-site--h3').get_text(strip=True),
-        organisation_category=category,
+        organisation_name=item.find('a', class_='title-site--h3').get_text(strip=True)
+        organisation_category=category
         organisation_adress=item.find('p', class_='text--col1').get_text(strip=True)
         organisation_description = item.find('div', class_='field-item even').get_text(strip=True)
-        new_company = organisation(organisation_name=organisation_name,
-                organisation_category=organisation_category,
-                organisation_adress=organisation_adress,
-                organisation_description=organisation_description)
-        try:
-            organisation.objects.get_or_create(new_company)
-            organisation.save
-        except:
+        # new_company = organisation(organisation_name=organisation_name,
+        #         organisation_category=organisation_category,
+        #         organisation_adress=organisation_adress,
+        #         organisation_description=organisation_description)
+        comp_exists = organisation.objects.filter(organisation_name=organisation_name.replace("',)", "").replace("('", ""),
+                organisation_category=organisation_category.replace("',)", "").replace("('", ""),
+                organisation_adress=organisation_adress.replace("',)", "").replace("('", ""),
+                organisation_description=organisation_description.replace("',)", "").replace("('", "")).exists()
+        if not comp_exists:
+            new_company = organisation.objects.create(organisation_name=organisation_name.replace("',)", "").replace("('", ""),
+                organisation_category=organisation_category.replace("',)", "").replace("('", ""),
+                organisation_adress=organisation_adress.replace("',)", "").replace("('", ""),
+                organisation_description=organisation_description.replace("',)", "").replace("('", ""))
+        else:
             print("Компания", organisation_name, "уже существует")
+            return
 
+        promisel.append(1)
         if (": " in organisation_description):
-            save_products(organisation_description, ": ", new_company)
+            save_products(organisation_description, ": ", new_company, category)
         elif ("реализует " in organisation_description.lower()):
             save_products(organisation_description.lower(), "реализует ", new_company, category)
         elif ("производим " in organisation_description.lower()):
             save_products(organisation_description.lower(), "производим ", new_company, category)
         elif ("производит " in organisation_description.lower()):
             save_products(organisation_description.lower(), "производит ", new_company, category)
-    return promisel # db
+    return promisel
 
 def parse(url, category):
     URL = 'https://fabricators.ru/zavody?region=11800&product=' + url
@@ -186,10 +194,11 @@ def parse(url, category):
         pages_count = get_pages_count(html.text)
         for page in range(0, pages_count):
             html = get_html(URL, params={'page': page})
-            array.extend(get_content(html.text, category))
-        print(array)
+            array.append(get_content(html.text, category))
+        # print(array)
+        graf_array.append((len(array), category))
     else:
-        print('EROR')
+        print('ERROR')
 
 @celery_app.task(name='parse_fabricator')
 def parse_fabricator_db():
