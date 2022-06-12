@@ -19,7 +19,7 @@ class organisation(models.Model):
     updated = models.DateTimeField(auto_now=True)
     organisation_okved = models.CharField(max_length=8, verbose_name=u"Вид деятельности", blank=True)
     organisation_category = models.CharField(max_length=200, verbose_name=u"Категория", blank=True)
-    organisation_description = models.CharField(max_length=200, verbose_name=u"Описание", blank=True)
+    organisation_description = models.CharField(max_length=1048, verbose_name=u"Описание", blank=True)
     organisation_principal = models.CharField(max_length=200, verbose_name=u"Директор", blank=True)
     organisation_inn = models.CharField(max_length=200, verbose_name=u"ИНН", blank=True)
     organisation_adress = models.CharField(max_length=250, verbose_name=u"Адрес", blank=True)
@@ -79,5 +79,18 @@ class product(models.Model):
         verbose_name_plural = 'Базы данных продуктов'
         ordering = ['-product_name', '-product_info', '-product_sanctions_import',
                     '-product_sanctions_export']
+
+class okved(models.Model):
+    id_okved = models.CharField(max_length=10, verbose_name=u"Номер")
+    name = models.CharField(max_length=2048, verbose_name=u"Название")
+    description = models.CharField(max_length=10000, verbose_name=u"Описание")
+
+    def __str__(self):
+        return f"{self.id_okved}"
+
+    class Meta:
+        verbose_name = 'База данных ОКВЭД'
+        verbose_name_plural = 'Базы данных ОКВЭД'
+        ordering = ['-id_okved', '-name', '-description']
 
 
