@@ -43,31 +43,25 @@ li
 </style>
 <link rel="stylesheet" href="{% static 'organisations/css/main_table.css'%}">
 		<!--Таблица организаций-->
-		<div class="container">
-			<br><br><br>
+		<div class="card shadow mt-3 col-10" style="width: 100%;margin: 0 auto;" data-bs-toggle="tooltip" data-bs-placement="center"
+			title="Login">
+			<div class="card-body">
+				<br><br><br>
 
-			<table class="table table-bordered" id="example" style="text-align: center;">
-				<thead class="table-success">
-					<tr>
-						<th>Организация</th>
-						<th>Вид деятельности</th>
-						<th>Категория</th>
-						<th>Санкции</th>
-						<th>Ссылка</th>
-					</tr>
-				</thead>
-				<!--data from db-->
-				{% for organisation in organisations %}
-				<tr>
-					<td><li><a style="color: #111;" href="organisation/{{ organisation.publish|date:'SHORT_DATE_FORMAT' }}/{{ organisation.slug }}">{{organisation.organisation_name}}</a></li></td>
-					<td>{{organisation.organisation_okved}}</td>
-					<td>{{organisation.organisation_category}}</td>
-					<td>{{organisation.organisation_sanctions}}</td>
-					<td>{{organisation.organisation_link}}</td>
-				</tr>
-				{% endfor %}
-			</table>
-
+				<table class="table table-bordered" id="example" style="text-align: center;">
+					<thead class="table-success">
+						<tr style="cursor: pointer;">
+							<th>Организация</th>
+							<th>ИНН</th>
+							<th>Вид деятельности</th>
+							<th>Категория</th>
+							<th>Санкции</th>
+							<th>Ссылка</th>
+						</tr>
+					</thead>
+					<!--data from db-->
+				</table>
+			</div>
 		</div>
 
 
@@ -84,7 +78,19 @@ li
 	<script src="https:////cdn.datatables.net/plug-ins/1.12.1/i18n/ru.json"></script>
 	<!--JS script-->
 	<script>
-		$("#example").DataTable({
+		var table = $("#example").DataTable({
+			"ajax" : "/json",
+			"columns":
+			[
+				{"data" : "organisation_name"},
+				{"data" : "organisation_inn"},
+				{"data" : "organisation_okved"},
+				{"data" : "organisation_category"},
+				{"data" : "organisation_sanctions"},
+				{"data" : "organisation_link"},
+			
+			],
+
 			"language": {
 				"processing": "Подождите...",
 				"search": "Поиск:",
@@ -100,8 +106,9 @@ li
 				"previous": "Предыдущая",
 				"next": "Следующая",
 				"last": "Последняя"},},
+				
 			paging: true,
-			pageLength: 15,
+			pageLength: 20,
 			lengthChange: false,
 			autoWidth: true,
 			searching: true,
@@ -110,11 +117,20 @@ li
 
 			"columnDefs": [
 			{
-				"targets": 4,
-				"orderable": false
+				"targets": 5,
+				"orderable": false,
+				"defaultContent": "-",
+                "targets": "_all"
 			},
 		]
 
 	});
-	</script>
+	$('#example').on('click', 'tr', function () {
+        // переход к проекту по нажатию на  него в строке таблицы
+        var data = table.row(this).data()
+        var org_inn = data.organisation_inn
+        document.location.href = "organisations/" + org_inn
+    });
+
+</script>
 {% endblock scripts %}

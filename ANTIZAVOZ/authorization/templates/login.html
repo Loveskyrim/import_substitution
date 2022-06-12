@@ -7,17 +7,19 @@
 
 
 <!--Login-->
-<div class="container py-5 col-2">
-  <h1>Войти</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ login_form|crispy }}
-    <div class="text-right py-2">
-    <button class="btn btn-primary" type="submit">Войти</button>
-      </div>
-  </form>
-  <br>
-  <p class="text-center">Не зарегистрированны? <a href="{% url 'register' %}">Создайте аккаунт</a>.</p>
-
+<div class="card shadow mt-3 col-3" style="width: 50%;margin: 0 auto;" data-bs-toggle="tooltip" data-bs-placement="center"
+    title="Login">
+  <div class="card-body">
+    <h1>Войти</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ login_form|crispy }}
+      <div class="text-right py-2">
+      <button class="btn btn-primary" type="submit">Войти</button>
+        </div>
+    </form>
+    <br>
+    <p class="text-center">Не зарегистрированны? <a href="{% url 'register' %}">Создайте аккаунт</a>.</p>
+  </div>
 </div>
 {% endblock %}

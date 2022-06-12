@@ -50,8 +50,19 @@ def update_product(request):
             return JsonResponse({}, status=400)
     return JsonResponse({}, status=400)
 
+def organisation_request(request, inn):
+    org_item = get_object_or_404(organisation, organisation_inn=inn)
+    return render(request, 'organisations/organisation.html', context={'organisation_item': org_item})
+
 
 @login_required(login_url='/login')
 def organisations_request(request):
     organisations_list = organisation.objects.all()
     return render(request, 'organisations/organisationsList.html', {"organisations": organisations_list})
+    
+@login_required(login_url='/login')
+def employee_json(request):
+    employees = organisation.objects.all()
+    data = [employee.get_data() for employee in employees]
+    response = {'data': data}
+    return JsonResponse(response)

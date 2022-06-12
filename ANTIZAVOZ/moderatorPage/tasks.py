@@ -93,7 +93,7 @@ def parse_site(url):
             if resp.status_code == 200:
                 print ('OK!')
             else:
-                print ('Boo!')
+                return
         except:
             search_url = "https://" + url
     
