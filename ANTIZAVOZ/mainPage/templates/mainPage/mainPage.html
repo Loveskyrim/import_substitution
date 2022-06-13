@@ -17,26 +17,15 @@
     </div>
 </section>
 
-<section class="text-center">
-    <div><p class="head-text"><big>Актуальная статистика по категориям замещенной продукции</big></p></div>
-        <div class="jumbotron container bg-dark mb-1">
-            <div class="row">
-                <div class="col-4">
-                    <ol>
-                        {% for category in canvaCategories %} 
-                        <div class="li-text"><li>{{ category }}</li></div>
-                        {% endfor %}
-                    </ol>     
-                </div>
-        
-                <div class="col-8">
-                        <canvas id="myChart" width="850" height="400"></canvas>
-                </div>
-            </div>
-        </div>
+
+<div class="text-center">
+<div><p class="head-text"><big>Актуальная статистика по категориям замещенной продукции</big></p></div>
+    <div >
+            <canvas id="myChart" width="850" height="400"></canvas>
     </div>
-                
-</section>
+</div>
+ 
+
 
 
 <section class="text-center">
