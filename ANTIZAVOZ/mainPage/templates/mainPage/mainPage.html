@@ -17,13 +17,33 @@
     </div>
 </section>
 
-<canvas id="myChart" width="400" height="200"></canvas>
+<section class="text-center">
+    <div><p class="head-text"><big>Актуальная статистика по категориям замещенной продукции</big></p></div>
+        <div class="jumbotron container bg-dark mb-1">
+            <div class="row">
+                <div class="col-4">
+                    <ol>
+                        {% for category in canvaCategories %} 
+                        <div class="li-text"><li>{{ category }}</li></div>
+                        {% endfor %}
+                    </ol>     
+                </div>
+        
+                <div class="col-8">
+                        <canvas id="myChart" width="850" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+</section>
+
 
 <section class="text-center">
 
         <div><p class="head-text"><big>Зарегистрированные Вами организации</big></p></div>
         <button type="button" class="sliding-button" data-toggle="modal"
-                        data-target="#addCompanyInfoModal">Добавить</button>
+                        data-target="#addCompanyInfoModal">Добавить</button>        
 </section>
 
 <section class="jumbotron text-center bg-dark">
@@ -56,42 +76,6 @@
     </div>
     </div>
 </section>
-<!-- 
-        <p class="lead text-muted">Продукты Ваших организаций</p>
-
-
-<section class="jumbotron text-center bg-info">
-<div class="album py-2 bg-grey">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in products %}
-
-            <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <h2>
-                    <a href="product/{{ product.publish|date:'SHORT_DATE_FORMAT' }}/{{ product.slug }}">{{ product.product_name }}</a>
-                </h2>
-                    <h6 class="card-subtitle mb-2 text-muted">Дата публикации: </h6>
-                <p class="date card-text">
-                    {{ product.publish|date:"SHORT_DATE_FORMAT" }}
-                </p>
-                    <h6 class="card-subtitle mb-2 text-muted">Организация-автор: </h6>
-                <p class="author card-text">
-                    {{ product.author }}
-                </p>
-                    <h6 class="card-subtitle mb-2 text-muted">Описание: </h6>
-                <p class="card-text">{{ product.product_info|truncatewords:30|linebreaks }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">{{ product.status }}</small>
-                </div>
-                </div>
-            </div>
-            </div>
-        {% endfor %}
-        </div>
-    </div>
-</div> -->
 
 </section>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -144,53 +128,12 @@
 
 {% block scripts %}
 
-<script src="{% static 'mainPage/main.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
 <script>
-    const labels = [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      '11',
-      '12',
-      '13',
-      '14',
-      '15',
-    ];
-    
-    const data = {
-      labels: labels,
-      datasets: [{
-      label: 'Количество замещенных категорий',
-      backgroundColor: '#6c757d',
-      data: [20, 10, 5, 2, 20, 30, 45, 20, 10, 5, 2, 20, 30, 45, 9],
-      }]
-    };
-    
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-      responsive: false,
-          scales: {
-              y: {
-            beginAtZero: true
-                }
-            }
-            },
-        };
+    var canvaCategories = "{{canvaCategories}}";
+    var canvaValues = "{{canvaValues}}";
+</script>
 
-        const myChart = new Chart(
-          document.getElementById('myChart'),
-          config
-        );
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.js"></script>
+<script src="{% static 'mainPage/main.js' %}"></script>
 
 {% endblock scripts %}

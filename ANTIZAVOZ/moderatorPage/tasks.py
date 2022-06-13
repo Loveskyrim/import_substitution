@@ -158,10 +158,7 @@ def get_content(html, category):
         organisation_category=category
         organisation_adress=item.find('p', class_='text--col1').get_text(strip=True)
         organisation_description = item.find('div', class_='field-item even').get_text(strip=True)
-        # new_company = organisation(organisation_name=organisation_name,
-        #         organisation_category=organisation_category,
-        #         organisation_adress=organisation_adress,
-        #         organisation_description=organisation_description)
+
         comp_exists = organisation.objects.filter(organisation_name=organisation_name.replace("',)", "").replace("('", ""),
                 organisation_category=organisation_category.replace("',)", "").replace("('", ""),
                 organisation_adress=organisation_adress.replace("',)", "").replace("('", ""),
