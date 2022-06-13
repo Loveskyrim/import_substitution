@@ -7,6 +7,7 @@
 Python
 - Django
 - Celery
+
 jQuery 
 
 ## Состав программы: 
